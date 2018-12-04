@@ -10,7 +10,11 @@ public class PlayerSetup : NetworkBehaviour {
 
     private void Start()
     {
-        gameCamera = Camera.main.gameObject;
+        if(gameCamera != null)
+        {
+            gameCamera = Camera.main.gameObject;
+        }
+
         DisableComponents(); 
     }
 
