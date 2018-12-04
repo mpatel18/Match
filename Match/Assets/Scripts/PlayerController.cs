@@ -48,7 +48,5 @@ public class PlayerController : MonoBehaviour {
 
         // Apply camera rotation
         movement.CameraRotate(-camera_rotation);
-
-
     }
 }
