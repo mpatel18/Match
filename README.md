@@ -7,6 +7,4 @@ Engine: Unity Game Engine
 
 Assets: Unity Standard Asset Package (Prototyping) 
         Link: https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-32351
-        
-Crosshair asset: Game #UI
-        Link: https://gameui.io/
+
