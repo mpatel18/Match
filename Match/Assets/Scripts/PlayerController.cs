@@ -4,9 +4,11 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField]
     private float player_speed;
-
     [SerializeField]
-    private float camera_sensitivity; 
+    private float camera_sensitivity;
+    [SerializeField]
+    private float player_force; 
+
 
     private PlayerMotion movement;
 
@@ -16,6 +18,21 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update()
+    {
+        PlayerMovement();
+        CameraRotation();
+        Jump();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            
+        }
+    }
+
+    // Move player 
+    private void PlayerMovement()
     {
         // Player Movement based on World 
         float x_axis = Input.GetAxisRaw("Horizontal");
@@ -39,14 +56,29 @@ public class PlayerController : MonoBehaviour {
 
         // Apply player rotation
         movement.Rotate(rotation);
+    }
 
+    // Rotate Camera
+    private void CameraRotation()
+    {
         // Player Movement based on Camera (Camera tilt)
         float camera_y_axis = Input.GetAxisRaw("Mouse Y");
 
         // Rotate object on the y_axis based on camera x_axis
-        Vector3 camera_rotation = new Vector3(camera_y_axis, 0f, 0f) * camera_sensitivity;
+        float camera_rotationX = camera_y_axis * camera_sensitivity;
 
         // Apply camera rotation
-        movement.CameraRotate(-camera_rotation);
+        movement.CameraRotate(camera_rotationX);
+    }
+
+    private void Jump()
+    {
+        Vector3 applied_force = Vector3.zero; 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            applied_force = Vector3.up * player_force; 
+        }
+
+        movement.Force(applied_force);
     }
 }
